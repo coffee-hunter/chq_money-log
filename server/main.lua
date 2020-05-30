@@ -20,7 +20,7 @@ AddEventHandler('chq:GetUser', function()
             ['@identifier'] = xPlayer.identifier
         })
 
-        local name = result[1].name
+        local name = result[1].name                 -- If you would like more declared, add to print() below
         local firstname = result[1].firstname
         local lastname = result[1].lastname
         local group = xPlayer.getGroup()
@@ -32,13 +32,13 @@ AddEventHandler('chq:GetUser', function()
 
             if money >= Config.Money then
                 TriggerEvent('chq:Notify')
-                print(name, group, money)               -- If you want more declared in Server Console, add from above.
+                print(name, group, money)               -- Checks Steam Name, Server Group, and Cash
                 TriggerEvent('chq:MsgMoney')
             end
         
             if bank >= Config.Bank then
                 TriggerEvent('chq:Notify')
-                print(name, group, bank)
+                print(name, group, bank)                -- Checks Steam Name, Server Group, and Bank
                 TriggerEvent('chq:MsgBank')
             end
         
