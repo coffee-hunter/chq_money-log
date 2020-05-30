@@ -28,34 +28,17 @@ AddEventHandler('chq:GetUser', function()
         local bank = xPlayer.getAccount('bank').money
 
         Citizen.Wait(30 * 1000)
-        if group == Config.Group then
-
+        if group ~= Config.Group then
+            local msg
             if money >= Config.Money then
-                TriggerEvent('chq:Notify')
-                print(name, group, money)               -- Checks Steam Name, Server Group, and Cash
-                TriggerEvent('chq:MsgMoney')
+                msg = name.." high deposit to money "..money
+                TriggerEvent('chq:Notify', msg, "high")
             end
         
             if bank >= Config.Bank then
-                TriggerEvent('chq:Notify')
-                print(name, group, bank)                -- Checks Steam Name, Server Group, and Bank
-                TriggerEvent('chq:MsgBank')
+                msg = name.." high deposit to bank "..bank
+                TriggerEvent('chq:Notify', msg, "high")
             end
-        
-        else 
-
-            if money >= Config.Money then
-                TriggerEvent('chq:Notify')
-                print(name, group, money)
-                TriggerEvent('chq:MsgMoney')
-            end
-        
-            if bank >= Config.Bank then
-                TriggerEvent('chq:Notify')
-                print(name, group, bank)
-                TriggerEvent('chq:MsgBank')
-            end
-
         end
 
     until default ~= 0
@@ -63,17 +46,14 @@ AddEventHandler('chq:GetUser', function()
 end)
 
 RegisterNetEvent('chq:Notify')
-AddEventHandler('chq:Notify', function()
-    print('^1CHQ Money Logger^7')
-end)
+AddEventHandler('chq:Notify', function(msg, status)
+    local prefix
+    -- you can add different status here and append different colors for each
+    if status == "high" then
+        prefix = "^2"
+    else
+        prefix = "^7"
+    end
 
-RegisterNetEvent('chq:MsgMoney')
-AddEventHandler('chq:MsgMoney', function()
-    print('^2High Deposit to Money^7')
+    print(status..msg.."^7")
 end)
-
-RegisterNetEvent('chq:MsgBank')
-AddEventHandler('chq:MsgBank', function()
-    print('^2High Deposit to Bank^7')
-end)
-
