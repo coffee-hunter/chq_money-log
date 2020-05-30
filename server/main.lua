@@ -20,7 +20,7 @@ AddEventHandler('chq:GetUser', function()
             ['@identifier'] = xPlayer.identifier
         })
 
-        local name = result[1].name                 -- If you would like more declared, add to print() below
+        local name = result[1].name                 -- If you would like more declared, add to msg below using ..local..
         local firstname = result[1].firstname
         local lastname = result[1].lastname
         local group = xPlayer.getGroup()
@@ -31,12 +31,12 @@ AddEventHandler('chq:GetUser', function()
         if group ~= Config.Group then
             local msg
             if money >= Config.Money then
-                msg = name.." high deposit to money "..money
+                msg = name.." High Deposit To Money "..money
                 TriggerEvent('chq:Notify', msg, "high")
             end
         
             if bank >= Config.Bank then
-                msg = name.." high deposit to bank "..bank
+                msg = name.." High Deposit To Bank "..bank
                 TriggerEvent('chq:Notify', msg, "high")
             end
         end
@@ -50,10 +50,10 @@ AddEventHandler('chq:Notify', function(msg, status)
     local prefix
     -- you can add different status here and append different colors for each
     if status == "high" then
-        prefix = "^2"
+        prefix = "^1CHQ Money Log:"
     else
-        prefix = "^7"
+        prefix = "^7CHQ Money Log:"
     end
 
-    print(status..msg.."^7")
+    print(prefix..msg.."^7")
 end)
