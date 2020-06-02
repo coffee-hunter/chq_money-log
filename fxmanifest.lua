@@ -1,9 +1,8 @@
 fx_version 'bodacious'
 game 'gta5'
 
-description 'CHQ Money Log'
-
 author 'ColtenHQ#5123'
+description 'CHQ Money Log'
 
 server_scripts {
     'server/main.lua',
